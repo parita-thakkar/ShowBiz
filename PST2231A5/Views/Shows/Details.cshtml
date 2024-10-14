@@ -1,0 +1,102 @@
+﻿@model PST2231A5.Models.ShowWithDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" alt="Show Image" width="100" height="100" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coordinator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coordinator)
+        </dd>
+        <hr />
+        <dt>
+            Cast
+            <br />
+            <span class="badge badge-primary">@Model.Actors.Count()</span>
+        </dt>
+
+        <dd>
+            @foreach (var a in Model.Actors)
+            {
+                <span>@a.Name</span>
+                <br />
+            }
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.Episodes)
+            <br />
+            <span class="badge badge-primary">@Model.Episodes.Count()</span>
+        </dt>
+
+        <dd>
+            @foreach (var e in Model.Episodes)
+            {
+                <span>@e.Name</span>
+                <br />
+            }
+        </dd>
+        @if (Model.Premise != null || !Model.Premise.IsEmpty() || Model.Premise == "")
+        {
+            <hr />
+            <dt>
+                @Html.DisplayNameFor(model => model.Premise)
+            </dt>
+
+            <dd>
+                <div class="panel panel-default panel-body well">
+                    @Html.Raw(Model.Premise)
+                </div>
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @using System.Security.Claims;
+    @if ((User as ClaimsPrincipal).HasClaim(ClaimTypes.Role, "Clerk"))
+    {
+        @Html.ActionLink("Add New Episode", "AddEpisode", new { id = Model.ShowId })
+    }
+    | @Html.ActionLink("Back to List", "Index")
+</p>

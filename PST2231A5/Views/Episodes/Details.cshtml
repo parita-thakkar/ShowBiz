@@ -1,0 +1,89 @@
+﻿@model PST2231A5.Models.EpisodeWithDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SeasonNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeasonNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EpisodeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EpisodeNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AirDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AirDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.ImageUrl)" alt="Episode Cover Image" height="100" width="100" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Clerk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clerk)
+        </dd>
+        @if (Model.Premise != null || !Model.Premise.IsEmpty() || Model.Premise == "")
+        {
+            <hr />
+            <dt>
+                @Html.DisplayNameFor(model => model.Premise)
+            </dt>
+
+            <dd>
+                <div class="panel panel-default panel-body well">
+                    @Html.Raw(Model.Premise)
+                </div>
+            </dd>
+        }
+            <hr />
+            <dt>
+                @Html.DisplayNameFor(model => model.VideoUrl)
+            </dt>
+
+            <dd>
+                <video src="/episode/@Model.Id" controls="controls"></video>
+            </dd>
+        
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
